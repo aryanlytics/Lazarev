@@ -1,0 +1,307 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    color: #fff;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    background: #111111;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2.2vh 4vw;
+    background: #111111;
+    z-index: 1000;
+    border-bottom:  #ccc solid 0.9px;
+}
+
+.nav h1 {
+    font-size: clamp(14px, 2vw, 28px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    flex-shrink: 0;
+}
+.dot { color: #59ec99; }
+
+.nav .part2 {
+    display: flex;
+    gap: 2.9vw;
+}
+.nav .part2 h4 {
+    font-size: clamp(4px, 0.7vw, 12px);
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+}
+.nav .part2 h4:hover { 
+    color: #0ba34e;
+}
+
+.nav button {
+    font-size: clamp(9px, 1vw, 15px);
+    background-color: #0ba34e;
+    border: none;
+    border-radius: 50px;
+    padding: 0.6vh 1.5vw;
+    display: flex;
+    align-items: center;
+    gap: 0.8vw;
+    cursor: pointer;
+    flex-shrink: 0;          /* stops button from squishing */
+    white-space: nowrap;     /* stops text from wrapping and pushing layout */
+    transition: background 0.2s ease;
+}
+.nav button:hover { background-color: #09922f; }
+
+/* ─────────────────────────────────────────
+   NAV DROPDOWN
+───────────────────────────────────────── */
+.navbottom {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55%;
+
+    background: #111111;
+    border: 0.9px solid #d7e1d7;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    /* fixed padding — never changes, no layout recalc */
+    padding: 0 3vw;
+
+    /* closed */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+
+    /* only animate max-height and opacity — nothing that triggers layout */
+    transition:
+        max-height 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s ease;
+}
+
+.navbottom.open {
+    max-height: 220px;   /* just above your actual content height — not 50vh */
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* inner wrapper handles vertical spacing — padding here doesn't animate */
+.navbottom-inner {
+    display: contents; /* passthrough — no extra box */
+    padding: 3vh 0 3.5vh;
+}
+
+.bottomdiv {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    min-width: 0;
+    padding: 0 0 1vh;  /* vertical space lives here, not on navbottom */
+}
+
+.bottomdiv h5 span {
+    display: block;
+    font-size: clamp(9px, 0.85vw, 12px);
+    font-weight: 400;
+    padding: 0 0vw;
+    color: #cec1c1;
+    cursor: pointer;
+    white-space: nowrap;
+
+    /* closed: above + invisible */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease,
+        color 0.35s ease;
+}
+
+.bottomdiv h5 span:hover { color: #ffffff; font-weight: 700; }
+
+/* open: slide down into place */
+.navbottom.open .bottomdiv h5 span {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* stagger per column */
+.navbottom .bottomdiv:nth-child(1) h5 span { transition-delay: 0.05s; }
+.navbottom .bottomdiv:nth-child(2) h5 span { transition-delay: 0.08s; }
+.navbottom .bottomdiv:nth-child(3) h5 span { transition-delay: 0.11s; }
+.navbottom .bottomdiv:nth-child(4) h5 span { transition-delay: 0.14s; }
+.navbottom .bottomdiv:nth-child(5) h5 span { transition-delay: 0.17s; }
+.navbottom .bottomdiv:nth-child(6) h5 span { transition-delay: 0.20s; }
+
+/* ─────────────────────────────────────────
+   PAGE 1 — HERO
+───────────────────────────────────────── */
+.page1 {
+    height: 170vh;
+    width: 100%;
+    padding-top: 14vmax;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #111111;
+}
+
+.page1 h1 {
+    font-size: clamp(36px, 7.5vw, 120px);
+    font-weight: 800;
+    line-height: 1.05;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+}
+
+.highlight {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    transform: translateY(-0.6vw);
+    margin: 0 0.2vw;
+}
+
+.page1 .highlight i {
+    font-size: clamp(20px, 3.5vw, 56px);
+    width: clamp(40px, 7vw, 110px);
+    height: clamp(40px, 7vw, 110px);
+    background: #0ba34e;
+    color: #fff !important;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 0 40px rgba(11, 163, 78, 0.45);
+}
+
+.page1 p {
+    font-size: clamp(12px, 1.3vw, 20px);
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 3vh clamp(20px, 17vw, 280px);
+    color: #ccc;
+}
+
+.page1-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 1vh;
+}
+
+.page1-1 h6 {
+    font-size: clamp(10px, 1.1vw, 16px);
+    font-weight: 300;
+    border: 1px solid #555;
+    border-radius: 50px;
+    padding: 0.4vh 1vw;
+    color: #ccc;
+}
+
+.page1-1 h6:nth-child(3) {
+    border: none;
+    padding: 0;
+}
+
+
+.page1-2 {
+    position: relative;
+    width: 80vw;
+    max-width: 1200px;
+    height: 85vh;
+    margin-top: 10vh;
+    border-radius: 24px;
+    overflow: hidden;  /* clips button at video edges */
+    cursor: none;    /* hides real cursor inside video */
+}
+
+.page1-2 video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+}
+
+.mouse-div {
+    position: absolute;
+    width: 8vw;
+    height: 8vw;
+    border-radius: 50%;
+    background: #0ba34e;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.8vw;
+    font-weight: 600;
+    line-height: 1.1;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    z-index: 10;
+    transition: left 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                top  0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.3s ease;
+}
+
+
+
+
+
+
+
+
+.mouse-div h4 {
+    transform: translateY(1vw);
+}
+.mouse-div i {
+    font-size: 1.5vw;
+    transform: translateY(-2.5vw);
+    display: flex;
+}
+
+
+/* ─────────────────────────────────────────
+   PAGE 2
+───────────────────────────────────────── */
+section {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #5e6b0b;
+}
