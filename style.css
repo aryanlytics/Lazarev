@@ -247,8 +247,8 @@ html, body {
 
 .page1-2 {
     position: relative;
-    width: 80vw;
-    max-width: 1200px;
+    width: 85vw;
+    max-width: 1300px;
 
     /* aspect-ratio replaces fixed height — video keeps its natural proportions */
     aspect-ratio: 16 / 9;
@@ -384,17 +384,87 @@ html, body {
 
 
 
-
-
-
 /* ─────────────────────────────────────────
-   PAGE 2
+   PAGE 2 - Stats Cards
 ───────────────────────────────────────── */
-section {
-    height: 100vh;
-    width: 100%;
+.page2 {
+    margin-top: 15vh;
+    margin-bottom: 15vh;
+    height: auto;
+    width: 85vw;
+    max-width: 1300px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #5e6b0b;
+    flex-wrap: wrap;
+    column-gap: 8px;
+    row-gap: 8px;
+}
+.page2 .cards {
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1vw 1.5vw;
+    flex-grow: 1;
+    background-color: #1f1f1f;
+    height: 23vw;
+    width: 25vw;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+/* replaces .page2 .v2 — applies to ALL card videos */
+.page2 .cards video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+/* content must sit above the video */
+.page2 .cards .cardscontent,
+.page2 .cards .number {
+    position: relative;
+    z-index: 2;
+}
+
+.page2 .cards .cardscontent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+.page2 .cards .number {
+    font-size: 1.2vw;
+    font-weight: 200;
+}
+
+.page2 .cards .cardscontent h1 {
+    font-size: 3.3vw;
+    text-transform: capitalize;
+}
+.page2 .cards .cardscontent p {
+    font-size: 1vw;
+    font-weight: 500;
+    text-transform: lowercase;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Media Queries */
+@media (max-width: 992px) {
+    .page2 .cards {
+        width: 30vw;
+    }
+}
+
+@media (max-width: 788px) {
+    .page2 .cards {
+        width: 90vw;
+    }
 }
