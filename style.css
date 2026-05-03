@@ -44,10 +44,11 @@ html, body {
     gap: 2.9vw;
 }
 .nav .part2 h4 {
-    font-size: clamp(4px, 0.7vw, 12px);
+    font-size: clamp(9px, 0.7vw, 12px);
     text-transform: uppercase;
     font-weight: 600;
     cursor: pointer;
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .nav .part2 h4:hover { 
     color: #0ba34e;
@@ -128,7 +129,7 @@ html, body {
     font-size: clamp(9px, 0.85vw, 12px);
     font-weight: 400;
     padding: 0 0vw;
-    color: #cec1c1;
+    color: #e2d7d7;
     cursor: pointer;
     white-space: nowrap;
 
@@ -141,7 +142,7 @@ html, body {
         color 0.35s ease;
 }
 
-.bottomdiv h5 span:hover { color: #ffffff; font-weight: 700; }
+.bottomdiv h5 span:hover { color: #0be34e; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
 /* open: slide down into place */
 .navbottom.open .bottomdiv h5 span {
@@ -161,9 +162,10 @@ html, body {
    PAGE 1 — HERO
 ───────────────────────────────────────── */
 .page1 {
-    height: 170vh;
+    height: auto;
+    min-height: 100vh;
     width: 100%;
-    padding-top: 14vmax;
+    padding-top: clamp(100px, 23vh, 180px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -185,7 +187,7 @@ html, body {
     align-items: center;
     justify-content: center;
     vertical-align: middle;
-    transform: translateY(-0.6vw);
+    transform: translateY(-0.7vw);
     margin: 0 0.2vw;
 }
 
@@ -199,15 +201,23 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: none;
     flex-shrink: 0;
-    box-shadow: 0 0 40px rgba(11, 163, 78, 0.45);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page1 .highlight i:hover {
+    transform: rotate(90deg) scale(1.08);
+    
+
 }
 
 .page1 p {
     font-size: clamp(12px, 1.3vw, 20px);
     font-weight: 300;
     line-height: 1.6;
-    margin: 3vh clamp(20px, 17vw, 280px);
+    margin: 3vh 0;
+    padding: 0 clamp(20px, 8vw, 180px);
     color: #ccc;
 }
 
@@ -239,33 +249,38 @@ html, body {
     position: relative;
     width: 80vw;
     max-width: 1200px;
-    height: 85vh;
+
+    /* aspect-ratio replaces fixed height — video keeps its natural proportions */
+    aspect-ratio: 16 / 9;
+
     margin-top: 10vh;
     border-radius: 24px;
-    overflow: hidden;  /* clips button at video edges */
-    cursor: none;    /* hides real cursor inside video */
+    overflow: hidden;
+    cursor: none;
 }
 
 .page1-2 video {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover;   /* same for both preview and full video — no black bars */
     display: block;
     border-radius: 20px;
 }
 
+
 .mouse-div {
     position: absolute;
-    width: 8vw;
-    height: 8vw;
+    width: clamp(80px, 8vw, 140px);  /* won't shrink to 30px on mobile */
+    height: clamp(80px, 8vw, 140px);
     border-radius: 50%;
     background: #0ba34e;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 4px;
     text-align: center;
-    font-size: 0.8vw;
+    font-size: clamp(8px, 0.8vw, 13px);
     font-weight: 600;
     line-height: 1.1;
     pointer-events: none;
@@ -288,10 +303,88 @@ html, body {
     transform: translateY(1vw);
 }
 .mouse-div i {
-    font-size: 1.5vw;
+    font-size: clamp(14px, 1.5vw, 22px);
     transform: translateY(-2.5vw);
     display: flex;
 }
+
+/* ──────────────────────────────────────────
+   MOBILE — 768px and below
+   (tablet + phone)
+─────────────────────────────────────────── */
+@media (max-width: 788px) {
+
+    /* Nav: hide middle links, keep logo + button */
+    .nav .part2 {
+        display: none;
+    }
+    .nav {
+        padding: 2vh 5vw;
+        justify-content: space-between;
+    }
+    .nav h1 {
+        font-size: clamp(16px, 5vw, 24px);
+    }
+    .nav button {
+        font-size: 12px;
+        padding: 1vh 4vw;
+        gap: 6px;
+    }
+
+    /* Nav dropdown — disable on mobile */
+    .navbottom {
+        display: none;
+    }
+
+    /* Hero heading */
+    .page1 h1 {
+        font-size: clamp(32px, 10vw, 60px);
+        letter-spacing: -1px;
+    }
+
+    /* Green circle icon in heading */
+    .page1 .highlight i {
+        width: clamp(32px, 10vw, 60px);
+        height: clamp(32px, 10vw, 60px);
+        font-size: clamp(16px, 5vw, 32px);
+    }
+
+    /* Description paragraph */
+    .page1 p {
+        font-size: clamp(13px, 3.5vw, 18px);
+        padding: 0 6vw;
+    }
+
+    /* Pills row */
+    .page1-1 h6 {
+        font-size: clamp(11px, 3vw, 15px);
+        padding: 1vh 3vw;
+    }
+
+    /* Video container */
+    .page1-2 {
+        width: 92vw;
+        height: 45vh;
+        margin-top: 5vh;
+        border-radius: 16px;
+    }
+}
+/* ──────────────────────────────────────────
+   SMALL PHONES — 480px and below
+─────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .page1 h1 {
+        font-size: clamp(28px, 9vw, 44px);
+    }
+    .page1-2 {
+        height: 35vh;
+    }
+}
+
+
+
+
+
 
 
 /* ─────────────────────────────────────────

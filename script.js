@@ -38,17 +38,15 @@ box.addEventListener('mouseleave', () => {});
 // ================== VIDEO SWAP ==================
 box.addEventListener('click', () => {
     if (!isPlaying) {
-        // preview → full video
-        previewVideo.src            = 'https://files-support.com/static/la/la-reel.mp4';
-        previewVideo.loop           = false;
-        previewVideo.muted          = false;
-        previewVideo.style.objectFit = 'contain'; // no crop — show full frame
+        previewVideo.src   = 'https://files-support.com/static/la/la-reel.mp4';
+        previewVideo.loop  = false;
+        previewVideo.muted = false;
+        // removed: previewVideo.style.objectFit = 'contain'
         previewVideo.play();
-        mouseDiv.style.opacity      = '0';        // hide button
+        mouseDiv.style.opacity      = '0';
         mouseDiv.style.pointerEvents = 'none';
         isPlaying = true;
     } else {
-        // full video → back to preview
         resetToPreview();
     }
 });
