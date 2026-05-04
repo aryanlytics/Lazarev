@@ -468,3 +468,122 @@ html, body {
         width: 90vw;
     }
 }
+
+
+
+
+
+
+.page3 {
+    height: auto;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.page3 .page3h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;   /* left-align like Lazarev */
+    width: 85vw;
+    padding-top: 10vh;
+}
+
+.page3 .page3h1 h1 {
+    font-size: clamp(32px, 5.5vw, 100px);
+    font-weight: 600;
+    line-height: 0.95;
+    text-transform: capitalize;
+    letter-spacing: -2px;
+    color: #111111;
+}
+
+.page3content {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    display: flex;
+    border-top: 1px solid #111111;
+    gap: 6vw;                  /* was 28vw — way too wide */
+    padding-top: 6vh;
+    padding-bottom: 4vh;
+    width: 85vw;
+    align-items: flex-start;
+}
+
+.page3content .left {
+    flex: 0 0 auto;            /* don't shrink */
+    display: flex;
+    align-items: flex-start;
+    padding-top: 0.5vh;
+}
+
+.page3content .left button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 1.2vh 1.5vw;     /* padding-based height, not vh height */
+    color: #ffffff;
+    background-color: #0ba34e;
+    border-radius: 50px;
+    border: 1px solid #0ba34e; /* fixed syntax */
+    font-size: clamp(11px, 1vw, 15px);
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+}
+
+.page3content .left button:hover {
+    background-color: #09922f;
+    border-color: #09922f;
+}
+
+.page3content .left button span i {
+    font-size: clamp(12px, 1vw, 16px);
+}
+
+.page3content .right {
+    flex: 1;                   /* takes remaining space */
+    font-size: clamp(14px, 1.3vw, 20px);
+    color: #111111;
+    text-align: left;
+    line-height: 1.7;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+    .page3content {
+        flex-direction: column;  /* stack left and right */
+        gap: 4vh;
+    }
+
+    .page3content .left button {
+        padding: 1.5vh 5vw;
+        font-size: 13px;
+    }
+
+    .page3content .right {
+        font-size: clamp(14px, 4vw, 18px);
+    }
+
+    .page3 .page3h1 h1 {
+        font-size: clamp(28px, 8vw, 52px);
+        letter-spacing: -1px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page3 .page3h1 {
+        padding-top: 7vh;
+    }
+    .page3content {
+        width: 90vw;
+    }
+    .page3 .page3h1 {
+        width: 90vw;
+    }
+}
